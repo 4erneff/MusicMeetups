@@ -16,5 +16,8 @@
 
     <!-- our JavaScript -->
     <script src="<?php echo URL; ?>js/application.js"></script>
+    <script src="<?php echo URL; ?>lib/js/jquery-3.1.1.slim.min.js"></script>
+    <script src="<?php echo URL; ?>lib/js/tether.min.js"></script>
+    <script src="<?php echo URL; ?>lib/js/bootstrap.min.js"></script>
 </body>
 </html>
