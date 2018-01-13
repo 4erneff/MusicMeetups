@@ -16,3 +16,7 @@ define('DB_USER', 'root');
 define('DB_PASS', 'your_password');
 ```
 6. Execute the SQL scripts from _installation
+
+# External libs
+1. Bootstrap 4
+2. jQuery3
