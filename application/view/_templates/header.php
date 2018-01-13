@@ -28,7 +28,7 @@
             <a class="nav-link" href="<?php echo URL; ?>perform">Perform</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Attend</a>
+            <a class="nav-link" href="<?php echo URL; ?>attend">Attend</a>
           </li>
         </ul>
         <!-- <form class="form-inline mt-2 mt-md-0">

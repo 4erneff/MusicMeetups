@@ -101,3 +101,7 @@ body {
   .event-card {
     margin: 20px;
   }
+
+  .form-row {
+    padding-top: 30px;
+  }
