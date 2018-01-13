@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row">
-        <form>
+        <form class="col-sm-12 col-md-6 col-lg-6">
+        <h2 class="featurette-heading">Fill the form to host an event now</h2>
         <div class="form-group">
             <label for="full-name-input">Full name</label>
             <input type="text" class="form-control" id="full-name-input" required placeholder="Enter your name">
@@ -33,5 +34,51 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="row featurette">
+                <div class="col-md-12">
+                    <h2 class="featurette-heading">Host an event at your own bar or cafe.</h2>
+                    <p class="lead">Do not set any entrance tax but there surely will be a lot of beers sold!</p>
+                </div>
+                <div class="col-md-12">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" 
+                        alt="500x500" style="width: 500px; height: 500px;" 
+                        src=<?php echo URL; ?>img/host_bar.jpg data-holder-rendered="true">
+                </div>
+            </div>
+            <div class="row featurette">
+                <div class="col-md-12">
+                    <h2 class="featurette-heading">Have a party at your house</h2>
+                    <p class="lead">Invite other music fans to join you for a party at your place. They might also bring some drinks!</p>
+                </div>
+                <div class="col-md-12">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" 
+                        alt="500x500" style="width: 500px; height: 500px;" 
+                        src=<?php echo URL; ?>img/host_home.jpg data-holder-rendered="true">
+                </div>
+            </div>
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" 
+                        alt="500x500" style="width: 500px; height: 500px;" 
+                        src="" data-holder-rendered="true">
+                </div>
+            </div>
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" 
+                        alt="500x500" style="width: 500px; height: 500px;" 
+                        src="" data-holder-rendered="true">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
