@@ -1,148 +1,129 @@
 <?php
-class Model {
-	function __construct($db) {
-		try {
-			$this->db = $db;
-		} catch (PDOException $e) {
-			exit('Databse connection could not be established.');
-		}
-	}
 
-	public function addHost($email, $name, $number, $location, $maxGuests, $description) {
-		$sql = "INSERT INTO host (email, name, number, location, maxguests, description) VALUES (:email, :name, :number, :location, :maxguests, :description)";
-		$query = $this->db->prepare($sql);
-		$parameters = array(':email' => $email, ':name' => $name, ':number' => $number, ':location' => $location, ':maxguests' => $maxGuests, ':description' => $description);
+class Model
+{
+    /**
+     * @param object $db A PDO database connection
+     */
+    function __construct($db)
+    {
+        try {
+            $this->db = $db;
+        } catch (PDOException $e) {
+            exit('Database connection could not be established.');
+        }
+    }
 
-		$query->execute($parameters);
-	}
+    /**
+     * Get all songs from database
+     */
+    public function getAllSongs()
+    {
+        $sql = "SELECT id, artist, track, link FROM song";
+        $query = $this->db->prepare($sql);
+        $query->execute();
 
-	public function selectHostWithId($hostId) {
-		$sql = "SELECT id, email, name, number, location, maxguests, description FROM host WHERE id = :hostid";
-		$query = $this->db->prepare($sql);
+        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+        // core/controller.php! If you prefer to get an associative array as the result, then do
+        // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
+        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+        return $query->fetchAll();
+    }
 
-		$parameters = array(':hostid' => $hostId);
+    /**
+     * Add a song to database
+     * TODO put this explanation into readme and remove it from here
+     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
+     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
+     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
+     * in the views (see the views for more info).
+     * @param string $artist Artist
+     * @param string $track Track
+     * @param string $link Link
+     */
+    public function addSong($artist, $track, $link)
+    {
+        $sql = "INSERT INTO song (artist, track, link) VALUES (:artist, :track, :link)";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link);
 
-		$query->execute($parameters);
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
+        $query->execute($parameters);
+    }
 
-	public function selectHostWithEmail($email) {
-		$sql = "SELECT id, email, name, number, location, maxguests, description FROM host WHERE email = :email";
-		$query = $this->db->prepare($sql);
+    /**
+     * Delete a song in the database
+     * Please note: this is just an example! In a real application you would not simply let everybody
+     * add/update/delete stuff!
+     * @param int $song_id Id of song
+     */
+    public function deleteSong($song_id)
+    {
+        $sql = "DELETE FROM song WHERE id = :song_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':song_id' => $song_id);
 
-		$parameters = array(':email' => $email);
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
-		$query->execute($parameters);
+        $query->execute($parameters);
+    }
 
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
+    /**
+     * Get a song from database
+     */
+    public function getSong($song_id)
+    {
+        $sql = "SELECT id, artist, track, link FROM song WHERE id = :song_id LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':song_id' => $song_id);
 
-	public function addPerformer($email, $name, $number, $description) {
-		$sql = "INSERT INTO performer (email, name, number, description) VALUES (:email, :name, :number, :description)";
-		$query = $this->db->prepare($sql);
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
-		$parameters = array(':email' => $email, ':name' => $name, ':number' => $number, ':description' => $description);
+        $query->execute($parameters);
 
-		$query->execute($parameters);
-	}
+        // fetch() is the PDO method that get exactly one result
+        return $query->fetch();
+    }
 
-	public function selectPerformerWithId($performedId) {
-		$sql = "SELECT id, email, name, number, description FROM performer WHERE id = :performerid";
-		$query = $this->db->prepare($sql);
+    /**
+     * Update a song in database
+     * // TODO put this explaination into readme and remove it from here
+     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
+     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
+     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
+     * in the views (see the views for more info).
+     * @param string $artist Artist
+     * @param string $track Track
+     * @param string $link Link
+     * @param int $song_id Id
+     */
+    public function updateSong($artist, $track, $link, $song_id)
+    {
+        $sql = "UPDATE song SET artist = :artist, track = :track, link = :link WHERE id = :song_id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link, ':song_id' => $song_id);
 
-		$parameters = array(':performerid' => $performerId);
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
-		$query->execute($parameters);
+        $query->execute($parameters);
+    }
 
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
+    /**
+     * Get simple "stats". This is just a simple demo to show
+     * how to use more than one model in a controller (see application/controller/songs.php for more)
+     */
+    public function getAmountOfSongs()
+    {
+        $sql = "SELECT COUNT(id) AS amount_of_songs FROM song";
+        $query = $this->db->prepare($sql);
+        $query->execute();
 
-	public function selectPerformerWithEmail($performerEmail) {
-		$sql = "SELECT id, email, name, number, description FROM performer WHERE email = :email";
-		$query = $this->db->prepare($sql);
-
-		$parameters = array(':email' => $performerEmail);
-
-		$query->execute($parameters);
-
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
-
-	public function addAttender($email, $name, $countOfFriends) {
-		$sql = "INSERT INTO attender (email, name, countoffriends) VALUES (:email, :name, :countoffriends)";
-		$query = $this->db->preprare($sql);
-
-		$parameters = array(':email' => $email, ':name' => $name, ':countoffriends' => $countOfFriends );
-		
-		$query->execute($parameters);
-	}
-
-	public function selectAttenderWithId($attenderId) {
-		$sql = "SELECT id, email, name, countoffriends FROM attender WHERE id = :attenderid";
-		$query = $this->db->prepare($sql);
-
-		$parameters = array('attenderid' => $attenderId);
-
-		$query->execute($parameters);
-
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
-
-	public function selectAttenderWithEmail($attenderEmail) {
-		$sql = "SELECT id, email, name, countoffriends FROM attender WHERE email = :email";
-		$query = $this->db->prepare($sql);
-
-		$parameters = array('email' => $attenderEmail);
-
-		$query->execute($parameters);
-
-		return $query->fetch(PDO::FETCH_ASSOC);
-	}
-
-	public function addEvent($hostId, $date, $availablePlaces) {
-		$sql = "INSERT INTO event (hostid, date, remainingplaces) VALUES (:hostid, :date, :remainingplaces)";
-		$query = $this->db->prepare($sql);
-
-		$parameters = array(':hostid' => $hostId, ':date' => $date, ':remainingplaces' => $availablePlaces);
-
-		$query->execute($parameters);
-	}
-
-	public function addPerformerToEvent($eventId, $performerId, $minPayment) {
-		$sql = "UPDATE event SET performerid = :performerid, minpayment = :minpayment WHERE id = :eventid";
-		$query = $this->db->prepare($sql);
-		$parameters = array(':performerid' => $performerId, ':minpayment' => $minPayment, ':eventid' => $eventId);
-
-		$query->execute($parameters);
-	}
-
-	public function selectAllEventsWithoutPerformer() {
-		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL";
-		$query = $this->db->prepare($sql);
-		$query->execute();
-
-		return $query->fetchAll();
-	}
-
-	public function selectAllReadyEvents() {
-		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE performerid IS NOT NULL";
-		$query = $this->db->prepare($sql);
-		$query->execute();
-
-		return $query->fetchAll();
-	}
-
-	public function selectAllAttendersToEvent($eventId) {
-		$sql = "SELECT attenderid FROM eventattender WHERE eventid = :eventid";
-		$query = $this->db->prepare($sql);
-
-		$parameters = array(':eventid' => $eventId);
-
-		$query->execute($parameters);
-
-		return $query->fetchAll();
-	}
+        // fetch() is the PDO method that get exactly one result
+        return $query->fetch()->amount_of_songs;
+    }
 }
-
-?>
