@@ -20,3 +20,4 @@ define('DB_PASS', 'your_password');
 # External libs
 1. Bootstrap 4
 2. jQuery3
+3. Awesome fonts
