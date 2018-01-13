@@ -97,3 +97,7 @@ body {
   .featurette-heading {
     padding-bottom: 30px;
   }
+
+  .event-card {
+    margin: 20px;
+  }

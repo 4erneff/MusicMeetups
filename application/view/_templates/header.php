@@ -9,6 +9,7 @@
     <!-- CSS -->
     <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
     <link href="<?php echo URL; ?>lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo URL; ?>lib/css/fontawesome-all.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -24,7 +25,7 @@
             <a class="nav-link" href="<?php echo URL; ?>host">Host<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Perform</a>
+            <a class="nav-link" href="<?php echo URL; ?>perform">Perform</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Attend</a>
