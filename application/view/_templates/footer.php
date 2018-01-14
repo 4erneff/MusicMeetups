@@ -19,5 +19,7 @@
     <script src="<?php echo URL; ?>lib/js/jquery-3.1.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>lib/js/tether.min.js"></script>
     <script src="<?php echo URL; ?>lib/js/bootstrap.min.js"></script>
+
+    <script src="<?php echo URL; ?>js/host.js"></script>
 </body>
 </html>
