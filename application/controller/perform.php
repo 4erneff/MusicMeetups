@@ -11,10 +11,33 @@ class Perform extends Controller
      */
     public function index()
     {
+        $events = $this->arrayCastRecursive($this->model->selectAllEventsWithoutPerformer());
+        for ($i = 0; $i < sizeof($events); ++$i)
+        {
+            $events[$i]['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($events[$i]['hostid']));
+        }
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/perform/index.php';
         require APP . 'view/_templates/footer.php';
+    }
+
+    public function arrayCastRecursive($array)
+    {
+        if (is_array($array)) {
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+                    $array[$key] = $this->arrayCastRecursive($value);
+                }
+                if ($value instanceof stdClass) {
+                    $array[$key] = $this->arrayCastRecursive((array)$value);
+                }
+            }
+        }
+        if ($array instanceof stdClass) {
+            return $this->arrayCastRecursive((array)$array);
+        }
+        return $array;
     }
 
     /**
