@@ -41,7 +41,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE `musicmeetups`.`eventattender` (
 	`eventid` INT(8) NOT NULL,
 	`attenderid` INT(6) NOT NULL,
-	`countoffriends` INT(2) NOT NULL DEFAULT 0;
+	`countoffriends` INT(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
 ALTER TABLE `musicmeetups`.`event`
