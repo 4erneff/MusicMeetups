@@ -51,4 +51,13 @@ ALTER TABLE `musicmeetups`.`event`
   ADD CONSTRAINT `performer_id_event_relation` FOREIGN KEY (`performerid`) REFERENCES `performer` (`id`);
 COMMIT;
 
+CREATE TRIGGER `updateavailableplaces`
+AFTER INSERT
+ON `eventattender`
+FOR EACH ROW
+  UPDATE `event`
+     SET `remainingplaces` = `remainingplaces` - 1 - NEW.`countoffriends`
+   WHERE `id` = NEW.`eventid`;
+
+
 
