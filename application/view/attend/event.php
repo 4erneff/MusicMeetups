@@ -27,7 +27,7 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXD-cHS7-m3MOD7S1imtQAuMKcExKe1ek"></script>
         <script>
-            codeAddress(<?php $event['location']?>);
+            codeAddress('<?php echo $event['host']['location'] ?>');
         </script>
     </div>
     <div class="row form-row">
