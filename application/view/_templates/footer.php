@@ -21,5 +21,6 @@
     <script src="<?php echo URL; ?>lib/js/bootstrap.min.js"></script>
 
     <script src="<?php echo URL; ?>js/host.js"></script>
+    <script src="<?php echo URL; ?>js/perform.js"></script>
 </body>
 </html>
