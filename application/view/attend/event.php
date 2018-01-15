@@ -11,7 +11,7 @@
                 }, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var myOptions = {
-                            zoom: 12,
+                            zoom: 15,
                             center: results[0].geometry.location,
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         }
@@ -27,11 +27,11 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXD-cHS7-m3MOD7S1imtQAuMKcExKe1ek"></script>
         <script>
-            codeAddress("Sofia, Bulgaria, Musagenitsa 88A");
+            codeAddress(<?php $event['location']?>);
         </script>
     </div>
     <div class="row form-row">
-        <form class="col-sm-12 col-md-6 col-lg-6">
+        <form id ="attend-form"class="col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="full-name-input">Full name</label>
                 <input type="text" class="form-control" id="full-name-input" required placeholder="Enter your name">
@@ -48,23 +48,34 @@
                     <option>2</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Join</button>
+            <button type="submit" id="submit-attender" class="btn btn-primary">Join</button>
         </form>
         <div class="card event-card col-md-5 col-lg-4">
             <img class="card-img-top" data-src="" alt="100%x180" style="height: 180px; width: 100%; display: block;" 
                 src=<?php echo URL; ?>img/attend_card_img.jpg data-holder-rendered="true">
             <div class="card-block">
-                <h4 class="card-title">Preslava</h4>
-                <span><i class="fas fa-map-marker"></i>  Mladost 1 blok 54</span><br>
-                <span><i class="fas fa-calendar"></i>  12-02-2018</span><br>
-                <span><i class="fas fa-user"></i>  Dimitar Vlahovski | host</span><br>
-                <span><i class="fas fa-users"></i>  1 slots of 20 available</span>
+                <h4 class="card-title"><?php echo $event['performer']['name'] ?></h4>
+                <span><i class="fas fa-map-marker"></i> <?php echo $event['host']['location'] ?></span><br>
+                <span><i class="fas fa-calendar"></i>  <?php echo $event['date'] ?></span><br>
+                <span><i class="fas fa-user"></i>  <?php echo $event['host']['name'] ?> | host</span><br>
+                <span><i class="fas fa-users"></i> <?php echo $event['remainingplaces'] . ' slots of ' . $event['host']['maxguests'] . ' available' ?> </span>
                 <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" 
-                    style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div><br>
-                <p class="card-text">Host: This will be a rock party at my own apartment. Bring up some beers and join us to have great time together!</p>
-                <p class="card-text">Preslava: Everybody knows me already. Yeah, thats me!</p>
+                        <div class="progress-bar
+                            <?php 
+                                $percent = 100 - $event['remainingplaces'] / $event['host']['maxguests'] * 100; 
+                                if ($percent >= 80) {
+                                    echo "bg-danger";
+                                } elseif ($percent >= 35) {
+                                    echo "bg-info";
+                                } else {
+                                    echo "bg-success";
+                                }
+                            ?>" role="progressbar" 
+                            style="width: <?php echo (100 - $event['remainingplaces'] / $event['host']['maxguests'] * 100); ?>%;" 
+                            aria-valuenow="<?php echo (100 - $event['remainingplaces'] / $event['host']['maxguests'] * 100); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div><br>
+                <p class="card-text"><?php echo ('Host: ' . $event['host']['description']) ?></p>
+                <p class="card-text"><?php echo ('Performer: ' . $event['performer']['description']) ?></p>
             </div>
         </div>  
     </div>

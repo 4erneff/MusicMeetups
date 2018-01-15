@@ -118,7 +118,7 @@ class Model {
 	}
 
 	public function selectEventWithId($eventId) {
-		$sql = "SELECT id, hostid, date FROM event WHERE id = :eventid";
+		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE id = :eventid";
 		$query = $this->db->prepare($sql);
 
 		$parameters = array(':eventid' => $eventId);
