@@ -22,24 +22,6 @@ class Perform extends Controller
         require APP . 'view/_templates/footer.php';
     }
 
-    public function arrayCastRecursive($array)
-    {
-        if (is_array($array)) {
-            foreach ($array as $key => $value) {
-                if (is_array($value)) {
-                    $array[$key] = $this->arrayCastRecursive($value);
-                }
-                if ($value instanceof stdClass) {
-                    $array[$key] = $this->arrayCastRecursive((array)$value);
-                }
-            }
-        }
-        if ($array instanceof stdClass) {
-            return $this->arrayCastRecursive((array)$array);
-        }
-        return $array;
-    }
-
     public function event($event_id)
     {
         $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));

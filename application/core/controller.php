@@ -23,4 +23,24 @@ class Controller
     {
         $this->model = new Model($this->db);
     }
+
+    public function arrayCastRecursive($array)
+    {
+        if (is_array($array)) {
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+                    $array[$key] = $this->arrayCastRecursive($value);
+                }
+                if ($value instanceof stdClass) {
+                    $array[$key] = $this->arrayCastRecursive((array)$value);
+                }
+            }
+        }
+        
+        if ($array instanceof stdClass) {
+            return $this->arrayCastRecursive((array)$array);
+        }
+
+        return $array;
+    }
 }
