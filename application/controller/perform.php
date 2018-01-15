@@ -40,29 +40,58 @@ class Perform extends Controller
         return $array;
     }
 
-    /**
-     * PAGE: exampleone
-     * This method handles what happens when you move to http://yourproject/home/exampleone
-     * The camelCase writing is just for better readability. The method name is case-insensitive.
-     */
     public function event($event_id)
     {
+        $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
+        $event['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($event['hostid']));
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/perform/event.php';
         require APP . 'view/_templates/footer.php';
     }
 
-    /**
-     * PAGE: exampletwo
-     * This method handles what happens when you move to http://yourproject/home/exampletwo
-     * The camelCase writing is just for better readability. The method name is case-insensitive.
-     */
-    public function exampleTwo()
+    public function addPerformer($event_id)
     {
-        // load views
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/home/example_two.php';
-        require APP . 'view/_templates/footer.php';
+        $errors = array();
+        $form_data = array();
+
+        /* Validate the form on the server side */
+        if (empty($_POST['name'])) {
+            $errors['name'] = 'Name cannot be blank';
+        }
+
+        if (empty($_POST['email'])) {
+            $errors['email'] = 'Email cannot be blank';
+        }
+
+        if (empty($_POST['mobile'])) {
+            $errors['mobile'] = 'Please enter your mobile number';
+        }
+
+        if (empty($_POST['description'])) {
+            $errors['addInfo'] = 'Please, provide some info about you';
+        }
+
+        if (empty($_POST['minimal_tax']) || (!is_numeric($_POST['minimal_tax'])) || ((int)$_POST['minimal_tax'] < 1) 
+        || ((int)$_POST['minimal_tax'] > 10)) {
+            $errors['minimal_tax'] = 'The tax should be a positive integer up to 10 euro';
+        }
+
+        if (!empty($errors)) {
+            $form_data['success'] = false;
+            $form_data['errors']  = $errors;
+        }
+        else {
+            $this->model->addPerformer($_POST['email'], $_POST['name'], $_POST['mobile'], $_POST['description']);
+            $performer = $this->arrayCastRecursive($this->model->selectPerformerWithEmail($_POST['email']));
+            $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
+            $this->model->addPerformerToEvent($event['id'], $performer['id'], $_POST['minimal_tax']);
+
+            $form_data['success'] = true;
+            $form_data['message'] = 'You are registered as a performer for the event successfully!';
+        }
+
+        echo json_encode($form_data);
     }
+
 }

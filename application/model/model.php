@@ -117,6 +117,17 @@ class Model {
 		$query->execute($parameters);
 	}
 
+	public function selectEventWithId($eventId) {
+		$sql = "SELECT id, hostid, date FROM event WHERE id = :eventid";
+		$query = $this->db->prepare($sql);
+
+		$parameters = array(':eventid' => $eventId);
+
+		$query->execute($parameters);
+
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
+
 	public function selectAllEventsWithoutPerformer() {
 		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL";
 		$query = $this->db->prepare($sql);

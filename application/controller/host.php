@@ -28,7 +28,7 @@ class Host extends Controller
         }
 
         if (empty($_POST['email'])) {
-            $errors['email'] = 'Name cannot be blank';
+            $errors['email'] = 'Email cannot be blank';
         }
 
         if (empty($_POST['mobile'])) {
