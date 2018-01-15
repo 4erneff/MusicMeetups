@@ -47,7 +47,7 @@ class Model {
 		$query->execute($parameters);
 	}
 
-	public function selectPerformerWithId($performedId) {
+	public function selectPerformerWithId($performerId) {
 		$sql = "SELECT id, email, name, number, description FROM performer WHERE id = :performerid";
 		$query = $this->db->prepare($sql);
 
