@@ -154,6 +154,25 @@ class Model {
 
 		return $query->fetchAll();
 	}
+
+	public function addUser($email, $name, $number, $password) {
+		$sql = "INSERT INTO user (email, name, number, password) VALUES (:email, :name, :number, :password)";
+		$query = $this->db->prepare($sql);
+		$parameters = array(':email' => $email, ':name' => $name, ':number' => $number, ':password' => $password);
+
+		$query->execute($parameters);
+	}
+
+	public function selectUserByEmailAndPassword($email, $password) {
+		$sql = "SELECT id, email, name FROM user WHERE email = :email AND password = :password";
+		$query = $this->db->prepare($sql);
+
+		$parameters = array('email' => $email, 'password' => $password);
+
+		$query->execute($parameters);
+
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
 }
 
 ?>

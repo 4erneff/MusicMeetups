@@ -22,5 +22,6 @@
 
     <script src="<?php echo URL; ?>js/host.js"></script>
     <script src="<?php echo URL; ?>js/perform.js"></script>
+    <script src="<?php echo URL; ?>js/user.js"></script>
 </body>
 </html>

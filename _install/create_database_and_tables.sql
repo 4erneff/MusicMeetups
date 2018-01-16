@@ -44,6 +44,15 @@ CREATE TABLE `musicmeetups`.`eventattender` (
 	`countoffriends` INT(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
+CREATE TABLE `musicmeetups`.`user` (
+	`id` INT(6) NOT NULL AUTO_INCREMENT,
+	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`name` TEXT COLLATE utf8_unicode_ci NOT NULL,
+	`password` TEXT COLLATE utf8_unicode_ci NOT NULL,
+	`number` VARCHAR(10) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
 ALTER TABLE `musicmeetups`.`event`
   ADD CONSTRAINT `host_id_event_relation` FOREIGN KEY (`hostid`) REFERENCES `host` (`id`);
 

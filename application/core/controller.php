@@ -11,6 +11,8 @@ class Controller
     {
         $this->openDatabaseConnection();
         $this->loadModel();
+        // Start the session
+        session_start();
     }
 
     private function openDatabaseConnection()
