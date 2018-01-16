@@ -12,7 +12,7 @@ PRIMARY KEY (`id`)
 
 CREATE TABLE `musicmeetups`.`host` (
 	`id` INT(6) NOT NULL AUTO_INCREMENT,
-	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`email` VARCHAR(50) NOT NULL,
 	`name` TEXT COLLATE utf8_unicode_ci NOT NULL,
 	`number` VARCHAR(10) NOT NULL,
 	`location` TEXT COLLATE utf8_unicode_ci NOT NULL,
@@ -23,7 +23,7 @@ PRIMARY KEY (`id`)
 
 CREATE TABLE `musicmeetups`.`performer`(
 	`id` INT(6) NOT NULL AUTO_INCREMENT,
-	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`email` VARCHAR(50) NOT NULL,
 	`name` TEXT COLLATE utf8_unicode_ci NOT NULL,
 	`number` VARCHAR(10) NOT NULL,
 	`description` TEXT COLLATE utf8_unicode_ci NOT NULL,
@@ -32,7 +32,7 @@ PRIMARY KEY (`id`)
 
 CREATE TABLE `musicmeetups`.`attender` (
 	`id` INT(6) NOT NULL AUTO_INCREMENT,
-	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`email` VARCHAR(50) NOT NULL,
 	`name` TEXT COLLATE utf8_unicode_ci NOT NULL,
 	`countoffriends` INT(2) NOT NULL DEFAULT '0',
 PRIMARY KEY (`id`)
