@@ -34,7 +34,7 @@ class Attend extends Controller
         $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
         $event['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($event['hostid']));
         $event['performer'] = $this->arrayCastRecursive($this->model->selectPerformerWithId($event['performerid']));
-        $event['location'] = (string)$event['host']['location'];
+
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/attend/event.php';
@@ -53,14 +53,14 @@ class Attend extends Controller
         if (empty($_POST['email'])) {
             $errors['email'] = 'Email cannot be blank';
         }
-        echo($_POST['extra-people-input']);
+
         if (!empty($errors)) {
             $form_data['success'] = false;
             $form_data['errors']  = $errors;
         } else {
-            $this->model->addAttender($_POST['email'], $_POST['name'], $_POST['extra-people-input']);
+            $this->model->addAttender($_POST['email'], $_POST['name'], $_POST['extra_people']);
             $attender = (array)$this->model->selectAttenderWithEmail($_POST['email']);
-            $this->model->addEventAttender($event_id, $attender['id']);
+            $this->model->addEventAttender($event_id, $attender['id'], $attender['countoffriends']);
             $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
 
             $form_data['success'] = true;

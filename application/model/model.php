@@ -117,6 +117,13 @@ class Model {
 		$query->execute($parameters);
 	}
 
+	public function addEventAttender($eventId, $attenderId, $countOfFriends) {
+		$sql = "INSERT INTO eventattender (eventid, attenderid, countoffriends) VALUES (:eventid, :attenderid, :countoffriends)";
+		$query = $this->db->prepare($sql);
+		$parameters = array(':eventid' => $eventId, ':attenderid' => $attenderId, ':countoffriends' => $countOfFriends);
+		$query->execute($parameters);	
+	}
+
 	public function selectEventWithId($eventId) {
 		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE id = :eventid";
 		$query = $this->db->prepare($sql);

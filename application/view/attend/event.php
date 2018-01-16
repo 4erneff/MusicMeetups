@@ -34,15 +34,15 @@
         <form id ="attend-form"class="col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="full-name-input">Full name</label>
-                <input type="text" class="form-control" id="full-name-input" required placeholder="Enter your name">
+                <input type="text" class="form-control" id="full-name-input" name="name" required placeholder="Enter your name">
             </div>
             <div class="form-group">
                 <label for="email-input">Email address</label>
-                <input type="email" class="form-control" id="email-input" required placeholder="Enter email">
+                <input type="email" class="form-control" id="email-input" name="email" required placeholder="Enter email">
             </div>
             <div class="form-group">
                 <label for="extra-people-input">How many friends you will bring</label>
-                <select class="form-control" id="extra-people-input">
+                <select name="extra_people" type="nummber" class="form-control" id="extra-people-input">
                     <option>0</option>
                     <option>1</option>
                     <option>2</option>
@@ -80,3 +80,7 @@
         </div>  
     </div>
 </div>
+
+<script>
+    var eventId = <?php echo $event['id']; ?>;
+</script>

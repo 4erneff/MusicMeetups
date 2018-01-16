@@ -1,7 +1,7 @@
 $('#submit-attender').on('click', function(event){
-    print("sending shit");
+
     event.preventDefault();
-    var formUrl = url + "attend/addAttender/" + event_id; 
+    var formUrl = url + "attend/addAttender/" + eventId;
 
     $.ajax({
         type: "POST",
