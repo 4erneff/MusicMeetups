@@ -16,5 +16,6 @@
     <script src="<?php echo URL; ?>js/host.js"></script>
     <script src="<?php echo URL; ?>js/perform.js"></script>
     <script src="<?php echo URL; ?>js/user.js"></script>
+    <script src="<?php echo URL; ?>js/attend.js"></script>
 </body>
 </html>
