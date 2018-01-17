@@ -171,7 +171,7 @@ class Model {
 	}
 
 	public function selectUserByEmailAndPassword($email, $password) {
-		$sql = "SELECT id, email, name FROM user WHERE email = :email AND password = :password";
+		$sql = "SELECT id, email, name, number FROM user WHERE email = :email AND password = :password";
 		$query = $this->db->prepare($sql);
 
 		$parameters = array('email' => $email, 'password' => $password);

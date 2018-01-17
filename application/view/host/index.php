@@ -4,15 +4,18 @@
         <h2 class="featurette-heading">Fill the form to host an event now</h2>
         <div class="form-group">
             <label for="full-name-input">Full name</label>
-            <input type="text" class="form-control" id="full-name-input" name="name" required placeholder="Enter your name">
+            <input type="text" class="form-control" id="full-name-input" name="name" 
+                <?php if ($_SESSION['user']) echo "value='" . $_SESSION['user']['name'] . "' " ?> required placeholder="Enter your name">
         </div>
         <div class="form-group">
             <label for="email-input">Email address</label>
-            <input type="email" class="form-control" id="email-input" name="email" required placeholder="Enter email">
+            <input type="email" class="form-control" id="email-input" name="email" 
+                <?php if ($_SESSION['user']) echo "value='" . $_SESSION['user']['email'] . "' " ?>required placeholder="Enter email">
         </div>
         <div class="form-group">
             <label for="mobile-input">Mobile</label>
-            <input type="text" class="form-control" id="mobile-input" name="mobile" required placeholder="Enter your telephone number">
+            <input type="text" class="form-control" id="mobile-input" name="mobile" 
+                <?php if ($_SESSION['user']) echo "value='" . $_SESSION['user']['number'] . "' " ?>required placeholder="Enter your telephone number">
         </div>
         <div class="form-group">
             <label for="locaiton-input">Location</label>
