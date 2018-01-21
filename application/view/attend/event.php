@@ -30,8 +30,8 @@
             codeAddress('<?php echo $event['host']['location'] ?>');
         </script>
     </div>
-    <div class="row form-row">
-        <form id ="attend-form"class="col-sm-12 col-md-6 col-lg-6">
+    <div class="row">
+        <form id="attend-form" class="col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="full-name-input">Full name</label>
                 <input type="text" class="form-control" id="full-name-input" name="name" 
@@ -42,16 +42,13 @@
                 <input type="email" class="form-control" id="email-input" name="email" 
                 <?php if ($this->userExists()) { echo "value='" . $_SESSION['user']['email'] . "' "; } ?>required placeholder="Enter email">
             </div>
-            <div class="form-group">
-                <label for="extra-people-input">How many friends you will bring</label>
-                <select name="extra_people" type="nummber" class="form-control" id="extra-people-input">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="extra-people-input">How many friends you will bring</label>
+            <input type="number" class="form-control" min="0" max="2" id="extra-people-input" name="extra_people" required placeholder="Enter how many friends you'll be with">
+        </div>
             <button type="submit" id="submit-attender" class="btn btn-primary">Join</button>
         </form>
+        
         <div class="card event-card col-md-5 col-lg-4">
             <img class="card-img-top" data-src="" alt="100%x180" style="height: 180px; width: 100%; display: block;" 
                 src=<?php echo URL; ?>img/attend_card_img.jpg data-holder-rendered="true">

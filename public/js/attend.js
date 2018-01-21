@@ -2,7 +2,7 @@ $('#submit-attender').on('click', function(event){
 
     event.preventDefault();
     var formUrl = url + "attend/addAttender/" + eventId;
-
+    
     $.ajax({
         type: "POST",
         url: formUrl,
