@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label for="max-guests-input">Slots count</label>
-            <input type="number" class="form-control" id="max-guests-input" name="slots" required placeholder="Enter maximum number of attenders you want to have">
+            <input type="number" class="form-control" min="0" id="max-guests-input" name="slots" required placeholder="Enter maximum number of attenders you want to have">
         </div>
         <div class="form-group">
             <label for="desc-input">Additional info</label>
