@@ -45,4 +45,12 @@ class Controller
 
         return $array;
     }
+
+    public function userExists() {
+        if (!empty($_SESSION['user'])) {
+            return true;
+        }
+
+        return false;
+    }
 }

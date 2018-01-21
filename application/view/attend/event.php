@@ -35,12 +35,12 @@
             <div class="form-group">
                 <label for="full-name-input">Full name</label>
                 <input type="text" class="form-control" id="full-name-input" name="name" 
-                <?php if ($_SESSION['user']) echo "value='" . $_SESSION['user']['name'] . "' " ?>required placeholder="Enter your name">
+                <?php if ($this->userExists()) { echo "value='" . $_SESSION['user']['name']. "' "; } ?>required placeholder="Enter your name">
             </div>
             <div class="form-group">
                 <label for="email-input">Email address</label>
                 <input type="email" class="form-control" id="email-input" name="email" 
-                <?php if ($_SESSION['user']) echo "value='" . $_SESSION['user']['email'] . "' " ?>required placeholder="Enter email">
+                <?php if ($this->userExists()) { echo "value='" . $_SESSION['user']['email'] . "' "; } ?>required placeholder="Enter email">
             </div>
             <div class="form-group">
                 <label for="extra-people-input">How many friends you will bring</label>
