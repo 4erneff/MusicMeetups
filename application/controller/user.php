@@ -27,7 +27,8 @@ class User extends Controller
 
     public function signin()
     {
-        $user = $this->arrayCastRecursive($this->model->selectUserByEmailAndPassword($_POST['email'], $_POST['password']));
+        $passwordHash = hash('sha256', $_POST['password']);
+        $user = $this->arrayCastRecursive($this->model->selectUserByEmailAndPassword($_POST['email'], $passwordHash));
         if ($user) {
             $_SESSION['user'] = $user;
             header('Location: ' . URL . 'host', true, $permanent ? 301 : 302);
@@ -76,7 +77,8 @@ class User extends Controller
             $form_data['errors']  = $errors;
         }
         else {
-            $this->model->addUser($_POST['email'], $_POST['name'], $_POST['mobile'],  $_POST['password']);
+            $passwordHash = hash('sha256', $_POST['password']);
+            $this->model->addUser($_POST['email'], $_POST['name'], $_POST['mobile'],  $passwordHash);
             $form_data['success'] = true;
             $form_data['message'] = 'You registered successfully!';
         }
