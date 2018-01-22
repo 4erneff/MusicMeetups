@@ -44,6 +44,7 @@ class Attend extends Controller
     public function addAttender($event_id) {
         $errors = array();
         $form_data = array();
+        $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
 
         /* Validate the form on the server side */
         if (empty($_POST['name'])) {
@@ -54,14 +55,17 @@ class Attend extends Controller
             $errors['email'] = 'Email cannot be blank';
         }
 
+        if (!empty($_POST['extra_people']) && (int)$_POST['extra_people'] + 1 > $event['remainingplaces']) {
+            $errors['extra_people'] = 'There are only ' . $event['remainingplaces'] . ' places left for this event';
+        }
+
         if (!empty($errors)) {
             $form_data['success'] = false;
             $form_data['errors']  = $errors;
         } else {
-            $this->model->addAttender($_POST['email'], $_POST['name'], $_POST['extra_people']);
-            $attender = (array)$this->model->selectAttenderWithEmail($_POST['email']);
+            $atternderAdderId = $this->model->addAttender($_POST['email'], $_POST['name'], $_POST['extra_people']);
+            $attender = (array)$this->model->selectAttenderWithId($atternderAdderId);
             $this->model->addEventAttender($event_id, $attender['id'], $attender['countoffriends']);
-            $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
 
             $form_data['success'] = true;
             $form_data['message'] = 'You are registered as an attender for the event successfully!';

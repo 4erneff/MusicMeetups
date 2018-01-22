@@ -71,11 +71,12 @@ class Model {
 
 	public function addAttender($email, $name, $countOfFriends) {
 		$sql = "INSERT INTO attender (email, name, countoffriends) VALUES (:email, :name, :countoffriends)";
-		$query = $this->db->preprare($sql);
+		$query = $this->db->prepare($sql);
 
 		$parameters = array(':email' => $email, ':name' => $name, ':countoffriends' => $countOfFriends );
 		
 		$query->execute($parameters);
+		return  $this->db->lastInsertId(); 
 	}
 
 	public function selectAttenderWithId($attenderId) {
