@@ -58,3 +58,11 @@ define('DB_NAME', 'musicmeetups');
 define('DB_USER', 'root');
 define('DB_PASS', 'password');
 define('DB_CHARSET', 'utf8');
+
+// AWS deployment configuration
+// define('DB_TYPE', 'mysql');
+// define('DB_HOST', 'aanu3dvc65zw19.cxzz54j3oubv.eu-west-1.rds.amazonaws.com');
+// define('DB_NAME', 'musicmeetups');
+// define('DB_USER', 'root');
+// define('DB_PASS', 'password');
+// define('DB_CHARSET', 'utf8');

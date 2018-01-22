@@ -9,7 +9,7 @@ $('#submit-user').on('click', function(event){
         data: $("#user-form").serialize(), // serializes the form's elements.
         success: function(data)
         {
-            if (data.indexOf("Duplicate entry")) {
+            if (data.indexOf("Duplicate entry") > -1) {
                 alert("This email is already in use!");
                 return;
             }
