@@ -171,11 +171,14 @@ class Model {
 		return $query->fetchAll();
 	}
 
-	public function selectAllEventsForAttender($id){
-		$sql = "SELECT hostid, date, performerid, minpayment, remainingplaces FROM event JOIN eventattender ON event.id = eventid WHERE attenderid = :attenderId";
+	public function selectAllEventsForAttenderByEmail($email){
+		$sql = "SELECT DISTINCT hostid, date, performerid, minpayment, remainingplaces 
+		FROM event JOIN eventattender ON event.id = eventid 
+		JOIN attender on eventattender.attenderid = attender.id 
+		WHERE attender.email = :email ";
 		$query = $this->db->prepare($sql);
 
-		$parameters = array(':attenderId' => $id);
+		$parameters = array(':email' => $email);
 		
 		$query->execute($parameters);
 

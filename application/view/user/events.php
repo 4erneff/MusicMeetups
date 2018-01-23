@@ -80,7 +80,7 @@
             </h5>
             </div>
             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="card-block">
+            <div class="card-block row">
                 <?php foreach ($eventsToAttend as $event) { ?>
                     <div class="card event-card col-md-5 col-lg-4">
                         <img class="card-img-top" data-src="" alt="100%x180" style="height: 180px; width: 100%; display: block;" 

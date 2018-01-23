@@ -100,10 +100,8 @@ class User extends Controller
             {
                 $eventsToPerform[$i]['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($eventsToPerform[$i]['hostid']));
             }
-
-            $attender = $this->model->selectAttenderWithEmail($_SESSION['user']['email']);
-            $attenderId = $attender['id'];
-            $eventsToAttend = $this->arrayCastRecursive($this->model->selectAllEventsForAttender($attenderId));
+            
+            $eventsToAttend = $this->arrayCastRecursive($this->model->selectAllEventsForAttenderByEmail($_SESSION['user']['email']));
             for ($i = 0; $i < sizeof($eventsToAttend); ++$i)
             {
                 $eventsToAttend[$i]['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($eventsToAttend[$i]['hostid']));

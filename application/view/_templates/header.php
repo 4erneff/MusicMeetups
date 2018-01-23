@@ -30,21 +30,21 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo URL; ?>attend">Attend</a>
           </li>
-          <?php if ($_SESSION['user']) { ?> 
+          <?php if ($this->userExists()) { ?> 
             <li class="nav-item">
               <a class="nav-link" href="<?php echo URL; ?>user/events">My events</a>
             </li>
           <?php } ?>
         </ul>
-        <?php if (!$_SESSION['user']) { ?> 
-        <ul class="navbar-nav mr-auto" style="float: right;margin-right: 20%!important;">
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URL; ?>user/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo URL; ?>user/register">Register</a>
-          </li>
-        </ul>
+        <?php if (!$this->userExists()) { ?> 
+          <ul class="navbar-nav mr-auto" style="float: right;margin-right: 20%!important;">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo URL; ?>user/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo URL; ?>user/register">Register</a>
+            </li>
+          </ul>
         <?php } else {?>
         <ul class="navbar-nav mr-auto" style="float: right;margin-right: 20%!important;">
           <li class="nav-item active">
