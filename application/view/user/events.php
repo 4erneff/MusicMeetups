@@ -81,7 +81,19 @@
             </div>
             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
             <div class="card-block">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                <?php foreach ($eventsToAttend as $event) { ?>
+                    <div class="card event-card col-md-5 col-lg-4">
+                        <img class="card-img-top" data-src="" alt="100%x180" style="height: 180px; width: 100%; display: block;" 
+                            src=<?php echo URL; ?>img/perform_card_img.jpg data-holder-rendered="true">
+                        <div class="card-block">
+                            <h4 class="card-title"><?php echo $event['host']['name']; ?></h4>
+                            <span><i class="fas fa-map-marker"></i>  <?php echo $event['host']['location']; ?></span><br>
+                            <span><i class="fas fa-calendar"></i>  <?php echo $event['date']; ?></span><br>
+                            <span><i class="fas fa-user"></i>  <?php echo $event['host']['name']; ?> | Host</span><br>
+                            <p class="card-text"><?php echo $event['host']['description']; ?></p>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
             </div>
         </div>

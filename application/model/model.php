@@ -171,6 +171,17 @@ class Model {
 		return $query->fetchAll();
 	}
 
+	public function selectAllEventsForAttender($id){
+		$sql = "SELECT hostid, date, performerid, minpayment, remainingplaces FROM event JOIN eventattender ON event.id = eventid WHERE attenderid = :attenderId";
+		$query = $this->db->prepare($sql);
+
+		$parameters = array(':attenderId' => $id);
+		
+		$query->execute($parameters);
+
+		return $query->fetchAll();
+	}
+
 	public function selectAllReadyEvents() {
 		$currentDate = date('d/m/Y h:i a', time());
 		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE performerid IS NOT NULL AND date >= :currentDate";
