@@ -1,6 +1,7 @@
 <?php
 class Model {
 	function __construct($db) {
+		date_default_timezone_set(date_default_timezone_get());
 		try {
 			$this->db = $db;
 		} catch (PDOException $e) {
@@ -139,9 +140,11 @@ class Model {
 	}
 
 	public function selectAllEventsWithoutPerformer() {
-		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL";
+		$currentDate = date('d/m/Y h:i a', time());
+		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL AND date >= :currentDate";
 		$query = $this->db->prepare($sql);
-		$query->execute();
+		$parameters = array(':currentDate' => $currentDate);
+		$query->execute($parameters);
 
 		return $query->fetchAll();
 	}
@@ -169,9 +172,11 @@ class Model {
 	}
 
 	public function selectAllReadyEvents() {
-		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE performerid IS NOT NULL";
+		$currentDate = date('d/m/Y h:i a', time());
+		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE performerid IS NOT NULL AND date >= :currentDate";
 		$query = $this->db->prepare($sql);
-		$query->execute();
+		$parameters = array(':currentDate' => $currentDate);
+		$query->execute($parameters);
 
 		return $query->fetchAll();
 	}
