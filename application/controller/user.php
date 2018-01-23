@@ -85,5 +85,29 @@ class User extends Controller
 
         echo json_encode($form_data);
     }
+
+    public function events()
+    {
+        if ($_SESSION['user']) {
+            $eventsToHost = $this->arrayCastRecursive($this->model->selectAllEventsForHost($_SESSION['user']['email']));
+            for ($i = 0; $i < sizeof($eventsToHost); ++$i)
+            {
+                $eventsToHost[$i]['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($eventsToHost[$i]['hostid']));
+            }
+
+            $eventsToPerform = $this->arrayCastRecursive($this->model->selectAllEventsForPerformer($_SESSION['user']['email']));
+            for ($i = 0; $i < sizeof($eventsToPerform); ++$i)
+            {
+                $eventsToPerform[$i]['host'] = $this->arrayCastRecursive($this->model->selectHostWithId($eventsToPerform[$i]['hostid']));
+            }
+            require APP . 'view/_templates/header.php';
+            require APP . 'view/user/events.php';
+            require APP . 'view/_templates/footer.php';
+        } else {
+            header('Location: ' . URL, true, $permanent ? 301 : 302);
+            exit();
+        }
+        
+    }
     
 }

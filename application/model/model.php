@@ -14,6 +14,7 @@ class Model {
 		$parameters = array(':email' => $email, ':name' => $name, ':number' => $number, ':location' => $location, ':maxguests' => $maxGuests, ':description' => $description);
 
 		$query->execute($parameters);
+		return  $this->db->lastInsertId(); 
 	}
 
 	public function selectHostWithId($hostId) {
@@ -45,6 +46,7 @@ class Model {
 		$parameters = array(':email' => $email, ':name' => $name, ':number' => $number, ':description' => $description);
 
 		$query->execute($parameters);
+		return  $this->db->lastInsertId(); 
 	}
 
 	public function selectPerformerWithId($performerId) {
@@ -140,6 +142,28 @@ class Model {
 		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL";
 		$query = $this->db->prepare($sql);
 		$query->execute();
+
+		return $query->fetchAll();
+	}
+
+	public function selectAllEventsForHost($email) {
+		$sql = "select hostid, date, performerid, minpayment, remainingplaces from event join host on host.id = hostid where host.email = :email;";
+		$query = $this->db->prepare($sql);
+
+		$parameters = array(':email' => $email);
+
+		$query->execute($parameters);
+
+		return $query->fetchAll();
+	}
+
+	public function selectAllEventsForPerformer($email) {
+		$sql = "select hostid, date, performerid, minpayment, remainingplaces from event join performer on performer.id = performerid where performer.email = :email;";
+		$query = $this->db->prepare($sql);
+
+		$parameters = array(':email' => $email);
+
+		$query->execute($parameters);
 
 		return $query->fetchAll();
 	}

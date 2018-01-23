@@ -64,8 +64,8 @@ class Perform extends Controller
             $form_data['errors']  = $errors;
         }
         else {
-            $this->model->addPerformer($_POST['email'], $_POST['name'], $_POST['mobile'], $_POST['description']);
-            $performer = $this->arrayCastRecursive($this->model->selectPerformerWithEmail($_POST['email']));
+            $performerId = $this->model->addPerformer($_POST['email'], $_POST['name'], $_POST['mobile'], $_POST['description']);
+            $performer = $this->arrayCastRecursive($this->model->selectPerformerWithId($performerId));
             $event = $this->arrayCastRecursive($this->model->selectEventWithId($event_id));
             $this->model->addPerformerToEvent($event['id'], $performer['id'], $_POST['minimal_tax']);
 

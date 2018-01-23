@@ -56,9 +56,9 @@ class Host extends Controller
             $form_data['errors']  = $errors;
         }
         else {
-            $this->model->addHost($_POST['email'], $_POST['name'], $_POST['mobile'], 
+            $hostId = $this->model->addHost($_POST['email'], $_POST['name'], $_POST['mobile'], 
                 $_POST['location'], $_POST['slots'], $_POST['addInfo']);
-            $host = $this->model->selectHostWithEmail($_POST['email']);
+            $host = $this->model->selectHostWithId($hostId);
             $this->model->addEvent($host['id'], $_POST['datetime'], $_POST['slots']);
             $form_data['success'] = true;
             $form_data['message'] = 'Event was created successfully!';
