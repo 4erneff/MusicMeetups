@@ -56,6 +56,7 @@ class Host extends Controller
             $form_data['errors']  = $errors;
         }
         else {
+            $_POST['datetime'] = str_replace("T", " ", $_POST['datetime']);
             $hostId = $this->model->addHost($_POST['email'], $_POST['name'], $_POST['mobile'], 
                 $_POST['location'], $_POST['slots'], $_POST['addInfo']);
             $host = $this->model->selectHostWithId($hostId);

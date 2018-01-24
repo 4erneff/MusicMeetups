@@ -28,7 +28,7 @@
                             style="width: <?php echo (100 - $event['remainingplaces'] / $event['host']['maxguests'] * 100); ?>%;" 
                             aria-valuenow="<?php echo (100 - $event['remainingplaces'] / $event['host']['maxguests'] * 100); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <p class="card-text">This will be a rock party at my own apartment. Bring up some beers and join us to have great time together!</p>
+                    <p class="card-text"><?php echo $event['host']['description']; ?></p>
                     <a href="<?php echo URL; ?>attend/event/<?php echo $event['id']; ?>" class="btn btn-primary">Join</a>
                 </div>
             </div>

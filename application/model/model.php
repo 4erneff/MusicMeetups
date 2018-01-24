@@ -140,7 +140,7 @@ class Model {
 	}
 
 	public function selectAllEventsWithoutPerformer() {
-		$currentDate = date('d/m/Y h:i a', time());
+		$currentDate = date('Y-m-d', time());
 		$sql = "SELECT id, hostid, date FROM event WHERE performerid IS NULL AND date >= :currentDate";
 		$query = $this->db->prepare($sql);
 		$parameters = array(':currentDate' => $currentDate);
@@ -186,7 +186,7 @@ class Model {
 	}
 
 	public function selectAllReadyEvents() {
-		$currentDate = date('d/m/Y h:i a', time());
+		$currentDate = date('Y-m-d', time());
 		$sql = "SELECT id, hostid, date, performerid, minpayment, remainingplaces FROM event WHERE performerid IS NOT NULL AND date >= :currentDate";
 		$query = $this->db->prepare($sql);
 		$parameters = array(':currentDate' => $currentDate);

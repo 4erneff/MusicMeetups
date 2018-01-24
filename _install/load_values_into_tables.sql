@@ -25,17 +25,16 @@ INSERT INTO `musicmeetups`.`attender` (`email`, `name`, `countoffriends`) VALUES
 
 #events without performer
 INSERT INTO `musicmeetups`.`event` (`hostid`, `date`, `remainingplaces`) VALUES
-(1, '27/01/2018 20:00', 30),
-(3, '30/01/2018 19:30', 25),
-(4, '23/01/2018 20:30', 27);
+(1, '2018-10-27 20:00', 30),
+(3, '2018-01-30 19:30', 25),
+(4, '2018-01-23 20:30', 27);
 
 #ready events
 INSERT INTO `musicmeetups`.`event` (`hostid`, `performerid`, `date`, `remainingplaces`, `minpayment`) VALUES
-(1, 2, '26/01/2018 19:30', 30, 13),
-(2, 1, '31/01/2018 20:00', 10, 10),
-(3, 4, '07/02/2018 19:00', 25, 15),
-(5, 5, '02/02/2018 17:30', 12, 10),
-(5, 5, '16/02/2018 18:30', 12, 10);
+(1, 2, '2018-01-26 19:30', 30, 13),
+(2, 1, '2018-01-31 20:00', 10, 10),
+(3, 4, '2018-01-07 19:00', 25, 15),
+(5, 5, '2018-02-02 17:30', 12, 10),
 
 INSERT INTO `musicmeetups`.`eventattender`(`eventid`, `attenderid`, `countoffriends`) VALUES
 (4, 3, 2),
